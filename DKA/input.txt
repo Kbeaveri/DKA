@@ -1,5 +1,6 @@
+ads123
 PROGRAM asd
 INTEGER asd = 123
 adad = aas123d
-FOR
+FOR 1 TO 2 DO asd + asfast
 END

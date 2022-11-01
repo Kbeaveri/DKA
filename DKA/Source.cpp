@@ -197,6 +197,7 @@ vector <string> Raz = { "=" , "+","FOR","TO","DO"};
 class Analizator {
 public:
     string all_txt;
+    string buf;
     int num = 0;
     Analizator(string all_txt) {
         this->all_txt = all_txt;
@@ -211,42 +212,47 @@ public:
         num = i + 1;
         return buf;
     };
-    pair <string, string> DKA() {
+   int DKA() {
         int state = 1;
-        string buf = Go_next();
+        buf = Go_next();
+        bool isnum = false;
         pair <string, string> answer;
         if (isdigit(buf[0])) {
             state = 2;
         }
-        if (isalpha(buf[0])) {
+        else if (isalpha(buf[0])) {
             state = 3;
         }
-        if (find(Raz.begin(), Raz.end(), buf) != Raz.end()) {
-            answer.first = buf;
-            answer.second = "OPERATOR";
-            return answer;
+        else {
+            return 4;
         }
         switch (state)
         {
         case 2:
             for (int i = 0; i < buf.size(); i++) {
                 if (!isdigit(buf[i])) {
-                    answer.first = buf;
-                    answer.second = "ERROR";
-                    return answer;
+                    return 4;
                 }
             }
-            answer.first = buf;
-            answer.second = "IntNum";
-            return answer;
+            return 2;
         case 3:
             for (int i = 0; i < buf.size(); i++) {
                 if (!isalpha(buf[i])) {
-                    answer.first = buf;
-                    answer.second = "ERROR";
-                    return answer;
+                    return 4;
                 }
             }
+            return 3;
+        }
+    }
+    pair <string, string> Licsema() {
+        pair <string, string> answer;
+        int a = DKA();
+        if (a == 2) {
+            answer.first = buf;
+            answer.second = "IntNum";
+            return answer;
+        }
+        if (a == 3) {
             if (find(KW.begin(), KW.end(), buf) != KW.end()) {
                 answer.first = buf;
                 answer.second = "KEY WORLD";
@@ -257,11 +263,20 @@ public:
                 answer.second = "ID";
                 return answer;
             }
-
-        default:
-            cout << "Error, bad input, quitting\n";
-            break;
         }
+        if (a == 4) {
+            if (find(Raz.begin(), Raz.end(), buf) != Raz.end()) {
+                answer.first = buf;
+                answer.second = "OPERATOR";
+                return answer;
+            }
+            else{
+                answer.first = buf;
+                answer.second = "ERROR";
+                return answer;
+            }
+        }
+
     }
     bool is_empty() {
         if (num < all_txt.size()) {
@@ -287,7 +302,7 @@ int main() {
     HashTable<string> B;
     while (A.is_empty()) {
         pair <string, string> f;
-        f = A.DKA();
+        f = A.Licsema();
         //cout << f.first << " " << f.second<<endl;
         B.Add(f.first, f.second);
     }
