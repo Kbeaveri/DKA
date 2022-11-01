@@ -1,0 +1,5 @@
+PROGRAM asd
+INTEGER asd = 123
+adad = aas123d
+FOR
+END
