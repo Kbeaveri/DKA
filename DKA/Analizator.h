@@ -1,19 +1,27 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "HashTable.h"
 
 using namespace std;
 
 class Analizator {
 public:
+    HashTable<string> A;
     vector <string> KW = { "PROGRAM","END","INTEGER" };
     vector <string> SEP = { "\n","\t" };
     vector <string> Raz = { "=" , "+","FOR","TO","DO" };
     string all_txt;
     string buf;
     int num = 0;
+    Analizator() {
+        this->all_txt = "";
+    }
     Analizator(string all_txt) {
         this->all_txt = all_txt;
+    }
+    void Add(string a) {
+        this->all_txt = a;
     }
     string Go_next() {
         int i = num;
@@ -63,17 +71,20 @@ public:
         if (a == 2) {
             answer.first = buf;
             answer.second = "IntNum";
+            A.Add(answer.first, answer.second);
             return answer;
         }
         if (a == 3) {
             if (find(KW.begin(), KW.end(), buf) != KW.end()) {
                 answer.first = buf;
                 answer.second = "KEY WORLD";
+                A.Add(answer.first, answer.second);
                 return answer;
             }
             else {
                 answer.first = buf;
                 answer.second = "ID";
+                A.Add(answer.first, answer.second);
                 return answer;
             }
         }
@@ -81,11 +92,13 @@ public:
             if (find(Raz.begin(), Raz.end(), buf) != Raz.end()) {
                 answer.first = buf;
                 answer.second = "OPERATOR";
+                A.Add(answer.first, answer.second);
                 return answer;
             }
             else {
                 answer.first = buf;
                 answer.second = "ERROR";
+                A.Add(answer.first, answer.second);
                 return answer;
             }
         }

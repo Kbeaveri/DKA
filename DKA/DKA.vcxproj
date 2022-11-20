@@ -128,12 +128,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Analizator.cpp" />
+    <ClCompile Include="BTree.cpp" />
     <ClCompile Include="HashTable.cpp" />
+    <ClCompile Include="Parser.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Analizator.h" />
+    <ClInclude Include="BTree.h" />
     <ClInclude Include="HashTable.h" />
+    <ClInclude Include="Parser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
