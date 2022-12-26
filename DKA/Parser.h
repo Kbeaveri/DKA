@@ -6,17 +6,28 @@ using namespace std;
 class Parser
 {
 public:
-	string all_txt;    
+	string all_txt;
 	Analizator A;
 	pair <string, string> now;
 	Parser(string all_txt) {
 		this->all_txt = all_txt;
 		A.Add(all_txt);
 	}
-	void start() 
+	void start()
 	{
 		now = Next_Lic();
-		if (now.first == "PROGRAM") {
+		if (now.second == "PROGRAM") {
+			now = Next_Lic();
+			if (now.second == "ID") {
+				now = Next_Lic();
+			}
+			else {
+				cout << "Oøèáêà";
+			}
+		}
+	}
+	void INTEGER() {
+		if (now.second == "INTEGER") {
 			now = Next_Lic();
 			ID();
 		}
@@ -24,66 +35,41 @@ public:
 	void ID() {
 		if (now.second == "ID") {
 			now = Next_Lic();
-			if (now.first == "|n") {
+			if (now.first == ",") {
 				now = Next_Lic();
-
+				ID();
+			}
+			else {
+				now = Next_Lic();
+				Operators();
+			}
+		}
+		else {
+			error();
+		}
+	}
+	void Operators() {
+		if (now = "ID") {
+			now = Next_Lic();
+			if (now.first == "=") {
+				Expr();
+			}
+			else {
+				error();
 			}
 		}
 	}
-	void WHO_NEXT() {
-		if (now.first == "INTEGER") {
-			now = Next_Lic();
-			ID();
-		}
-		if (now.first == "ID") {
-			now = Next_Lic();
-			next_beforID();
-		}
-	}
-	void ID2() {
-		if (now.second == "ID") {
+	void Expr() {
 
-		}
 	}
-	void next_beforID() {
-		if (now.first == "=") {
-			now = Next_Lic();
+	void error() {
+		cout << "Îøèáêà";
+	}
 
-		}
+	void OOO_Kurva() {
+		
 	}
-	void Next_INTEGER() {
-		if (now.first == "ID") {
-			now = Next_Lic();
-			if (now.first == "|n") {
-				now = Next_Lic();
-				WHO_NEXT();
-			}
-		}
-	}
-	void Exp() {
-		while (now.first == "Intnum" || now.first == "ID" || now.first == "(" || now.first == ")" || now.first == "+" || now.first == "-") {
-			now = Next_Lic();
-		}
-		if (now.first != "|n") {
 
-		}
-	}
-	void Exp_to() {
-		while (now.first == "Intnum" || now.first == "ID" || now.first == "(" || now.first == ")" || now.first == "+" || now.first == "-") {
-			now = Next_Lic();
-		}
-		if (now.first != "To") {
-
-		}
-	}
-	void Exp_do() {
-		while (now.first == "Intnum" || now.first == "ID" || now.first == "(" || now.first == ")" || now.first == "+" || now.first == "-") {
-			now = Next_Lic();
-		}
-		if (now.first != "DO") {
-
-		}
-	}
 
 	pair <string, string> Next_Lic() 
 	{
