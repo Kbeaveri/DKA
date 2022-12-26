@@ -26,7 +26,7 @@ public:
     string Go_next() {
         int i = num;
         string buf;
-        while (all_txt[i] != '\n' && all_txt[i] != ' ') {
+        while (all_txt[i] != ' '&& all_txt.size()>i) {
             buf += all_txt[i];
             i++;
         }
@@ -95,7 +95,7 @@ public:
                 //hash.Add(answer.first, answer.second);
                 return answer;
             }
-            if (buf == "|n") {
+            if (buf == "\n") {
                 answer.first = buf;
                 answer.second = "SEP";
                 return answer;

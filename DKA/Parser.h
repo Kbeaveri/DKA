@@ -16,7 +16,7 @@ public:
 	void start()
 	{
 		now = Next_Lic();
-		if (now.second == "PROGRAM") {
+		if (now.first == "PROGRAM") {
 			now = Next_Lic();
 			if (now.second == "ID") {
 				now = Next_Lic();
@@ -25,9 +25,16 @@ public:
 				cout << "Oøèáêà";
 			}
 		}
+
+		INTEGER();
+		if (now.second == "ID") {
+			now = Next_Lic();
+			Operators();
+		}
+		FOR_OP();
 	}
 	void INTEGER() {
-		if (now.second == "INTEGER") {
+		if (now.first == "INTEGER") {
 			now = Next_Lic();
 			ID();
 		}
@@ -39,8 +46,11 @@ public:
 				now = Next_Lic();
 				ID();
 			}
-			else {
+			else if (now.first == "\n") {
 				now = Next_Lic();
+				return;
+			}
+			else {
 				Operators();
 			}
 		}
@@ -49,18 +59,64 @@ public:
 		}
 	}
 	void Operators() {
-		if (now = "ID") {
+		if (now.first == "=") {
 			now = Next_Lic();
-			if (now.first == "=") {
-				Expr();
-			}
-			else {
-				error();
-			}
+			Expr();
+		}
+		else {
+			error();
 		}
 	}
 	void Expr() {
-
+		SimpleExp();
+		if (now.first == "+") {
+			now = Next_Lic();
+			Expr();
+		}
+		if (now.first == "-") {
+			now = Next_Lic();
+			Expr();
+		}
+		if (now.second == "ID" || now.second == "IntNum") {
+			Expr();
+		}
+	}
+	void SimpleExp() {
+		if (now.second == "ID") {
+			now = Next_Lic();
+			Expr();
+		}
+		if (now.first == "(") {
+			now = Next_Lic();
+			Expr();
+		}
+		if (now.second == "IntNum") {
+			now = Next_Lic();
+			Expr();
+		}
+	}
+	void FOR_OP() {
+		if (now.first == "FOR") {
+			now = Next_Lic();
+			ID();
+		}
+		else {
+			return;
+		}
+		if (now.first == "TO") {
+			now = Next_Lic();
+			Expr();
+		}
+		else {
+			error();
+		}
+		if (now.first == "DO") {
+			now = Next_Lic();
+			Operators();
+		}
+		else {
+			error();
+		}
 	}
 	void error() {
 		cout << "Îøèáêà";
