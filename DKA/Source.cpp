@@ -25,6 +25,6 @@ int main() {
     //    B.Add(f.first, f.second);
     //}
     //B.fout();
-    Parser A("PROGRAM a INTEGER c \n b = 36 FOR i TO 3 + 7 DO i + 1");
+    Parser A("PROGRAM a INTEGER c \n b = 36 FOR i = 1 TO 3 + 7 DO i + 1");
     A.start();
 }

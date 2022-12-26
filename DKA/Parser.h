@@ -51,8 +51,17 @@ public:
 				return;
 			}
 			else {
-				Operators();
+				error();
 			}
+		}
+		else {
+			error();
+		}
+	}
+	void Simple_ID() {
+		if (now.second == "ID") {
+			now = Next_Lic();
+			Operators();
 		}
 		else {
 			error();
@@ -68,6 +77,9 @@ public:
 		}
 	}
 	void Expr() {
+		if (now.first == "\n") {
+			return;
+		}
 		SimpleExp();
 		if (now.first == "+") {
 			now = Next_Lic();
@@ -98,7 +110,7 @@ public:
 	void FOR_OP() {
 		if (now.first == "FOR") {
 			now = Next_Lic();
-			ID();
+			Simple_ID();
 		}
 		else {
 			return;
@@ -119,7 +131,7 @@ public:
 		}
 	}
 	void error() {
-		cout << "Îøèáêà";
+		cout << "Error" << endl;
 	}
 
 	void OOO_Kurva() {
