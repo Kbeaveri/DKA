@@ -3,9 +3,7 @@
 #include <fstream>
 #include <string>
 #include <algorithm>
-#include "HashTable.h"
-#include "Analizator.h"
-#include "BTree.h"
+#include "Parser.h"
 
 using namespace std;
 
@@ -16,7 +14,7 @@ int main() {
     //string buffer;
     //while (!fin.eof()) {
     //    getline(fin, buffer);
-    //    all_txt += buffer +"\n";
+    //    all_txt += buffer +" |n ";
     //}
     //Analizator A(all_txt);
     //HashTable<string> B;
@@ -27,4 +25,6 @@ int main() {
     //    B.Add(f.first, f.second);
     //}
     //B.fout();
+    Parser A("PROGRAM a |n ");
+    A.start();
 }

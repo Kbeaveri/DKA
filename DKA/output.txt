@@ -1,16 +1,5 @@
-[2]	ERROR	ads123
-[3]	IntNum	1
-[5]	IntNum	123
-[6]	KEY WORLD	END
-[7]	ID	asfast
-[9]	KEY WORLD	PROGRAM
-[10]	IntNum	2
-[11]	ERROR	aas123d
-[13]	ID	adad
-[14]	OPERATOR	+
-[19]	ID	FOR
-[22]	ID	asd
-[23]	ID	TO
-[27]	OPERATOR	=
-[29]	KEY WORLD	INTEGER
-[30]	ID	DO
+[1]	ID	asdddf
+[2]	SEP	|n
+[3]	OPERATOR	=
+[5]	KEY WORLD	INTEGER
+[6]	IntNum	11

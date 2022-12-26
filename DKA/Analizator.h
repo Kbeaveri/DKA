@@ -1,18 +1,18 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "HashTable.h"
+//#include "HashTable.h"
 
 using namespace std;
 
 class Analizator {
 public:
-    HashTable<string> A;
-    vector <string> KW = { "PROGRAM","END","INTEGER" };
-    vector <string> SEP = { "\n","\t" };
-    vector <string> Raz = { "=" , "+","FOR","TO","DO" };
+    vector <string> KW = { "PROGRAM","END","INTEGER","FOR","TO","DO" };
+    vector <string> SEP = { "|n","\t" };
+    vector <string> Raz = { "=" , "+"};
     string all_txt;
     string buf;
+    //HashTable <string> hash;
     int num = 0;
     Analizator() {
         this->all_txt = "";
@@ -71,20 +71,20 @@ public:
         if (a == 2) {
             answer.first = buf;
             answer.second = "IntNum";
-            A.Add(answer.first, answer.second);
+            //hash.Add(answer.first, answer.second);
             return answer;
         }
         if (a == 3) {
             if (find(KW.begin(), KW.end(), buf) != KW.end()) {
                 answer.first = buf;
                 answer.second = "KEY WORLD";
-                A.Add(answer.first, answer.second);
+                //hash.Add(answer.first, answer.second);
                 return answer;
             }
             else {
                 answer.first = buf;
                 answer.second = "ID";
-                A.Add(answer.first, answer.second);
+                //hash.Add(answer.first, answer.second);
                 return answer;
             }
         }
@@ -92,13 +92,18 @@ public:
             if (find(Raz.begin(), Raz.end(), buf) != Raz.end()) {
                 answer.first = buf;
                 answer.second = "OPERATOR";
-                A.Add(answer.first, answer.second);
+                //hash.Add(answer.first, answer.second);
+                return answer;
+            }
+            if (buf == "|n") {
+                answer.first = buf;
+                answer.second = "SEP";
                 return answer;
             }
             else {
                 answer.first = buf;
                 answer.second = "ERROR";
-                A.Add(answer.first, answer.second);
+                //hash.Add(answer.first, answer.second);
                 return answer;
             }
         }
